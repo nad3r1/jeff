@@ -1,0 +1,57 @@
+/* Menu Page Specific Styling */
+
+/* Menu Section */
+.menu {
+    padding: 3rem 1rem;
+    background-color: #fff;
+    text-align: center;
+}
+.menu h1 {
+    font-size: 3rem;
+    color: #800000;
+    margin-bottom: 2rem;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+}
+.menu-section {
+    margin-bottom: 3rem;
+}
+.menu-section h2 {
+    color: #ffd700;
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+}
+.menu-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #fff8f0;
+    border: 2px solid #800000;
+    border-radius: 10px;
+    padding: 1.5rem;
+    margin: 1rem 0;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+.menu-item img {
+    width: 100px;
+    height: auto;
+    border-radius: 10px;
+    margin-right: 1.5rem;
+}
+.menu-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+.menu-item-details h3 {
+    color: #800000;
+    font-size: 1.8rem;
+    margin: 0;
+}
+.menu-item-details p {
+    color: #555;
+    margin: 0.5rem 0;
+}
+.menu-item-details span {
+    font-weight: bold;
+    color: #ffd700;
+}

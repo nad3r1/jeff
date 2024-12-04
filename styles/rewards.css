@@ -1,83 +1,46 @@
+/* Rewards Page Specific Styling */
 
 /* Rewards Section */
 .rewards {
+    padding: 3rem 1rem;
+    background-color: #fff;
     text-align: center;
-    padding: 1.5rem 1rem;
 }
-
 .rewards h1 {
-    font-size: 2rem;
-    margin-bottom: 1rem;
+    font-size: 3rem;
+    color: #800000;
+    margin-bottom: 2rem;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
 }
-
-.rewards .intro {
-    font-size: 1.1rem;
-    margin-bottom: 1.5rem;
-    color: #555;
-}
-
-.rewards-cards {
+.rewards-container {
     display: flex;
-    justify-content: center;
-    gap: 1.5rem;
     flex-wrap: wrap;
-    margin-bottom: 1.5rem;
+    gap: 2rem;
+    justify-content: center;
 }
-
-.card {
-    background-color: #fdf4e3;
+.reward-item {
+    background-color: #fff8f0;
+    border: 2px solid #800000;
     border-radius: 10px;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-    padding: 1.5rem;
+    padding: 2rem;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
     width: 250px;
-    text-align: center;
+    transition: transform 0.3s, box-shadow 0.3s;
 }
-
-.card img {
-    width: 120px;
+.reward-item img {
+    width: 80px;
     height: auto;
     margin-bottom: 1rem;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
 }
-
-.card h2 {
-    font-size: 1.2rem;
-    margin-bottom: 0.5rem;
+.reward-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
-
-.card p {
+.reward-item h3 {
+    color: #800000;
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+}
+.reward-item p {
     color: #555;
-}
-
-/* Join Now Section */
-.join-now {
-    background-color: #800000;
-    color: #ffd700;
-    padding: 0.75rem 1rem;
-    border-radius: 10px;
-    width: 90%;
-    margin: 1.5rem auto;
-    text-align: center;
-}
-
-.join-now h2 {
-    margin-bottom: 0.75rem;
-    font-size: 1.3rem;
-}
-
-.cta-button {
-    display: inline-block;
-    background-color: #ffd700;
-    color: #800000;
-    padding: 0.5rem 1rem;
-    border-radius: 5px;
-    font-size: 1rem;
-    font-weight: bold;
-}
-
-.cta-button:hover {
-    background-color: #fff8f0;
-    color: #800000;
 }

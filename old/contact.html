@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Jeff's Pizza Shop</title>
+    <link rel="stylesheet" href="styles/styles.css">
+    <link rel="stylesheet" href="styles/contact-style.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <h1>Jeff's Pizza Shop</h1>
+            <p>Your Local Favorite in Ames, Iowa</p>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="menu.html">Menu</a></li>
+                <li><a href="tracker.html">Order Tracker</a></li>
+                <li><a href="rewards.html">Rewards</a></li>
+                <li><a href="contact.html" class="active">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section class="contact">
+            <h1>Contact Us</h1>
+            <div class="contact-info">
+                <div class="info-block">
+                    <h2><i class="fas fa-map-marker-alt"></i> Location</h2>
+                    <p>2402 Lincoln Way<br>Ames, Iowa 50014</p>
+                </div>
+                <div class="info-block">
+                    <h2><i class="fas fa-phone"></i> Phone</h2>
+                    <p><a href="tel:+15152924020">(515) 292-4020</a></p>
+                </div>
+                <div class="info-block">
+                    <h2><i class="fas fa-clock"></i> Business Hours</h2>
+                    <p>Monday - Sunday: 10:00 AM - 2:00 AM</p>
+                </div>
+            </div>
+            <div class="map">
+                <h2>Find Us Here</h2>
+                <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3067.789422830698!2d-93.64035138462779!3d42.01996057921009!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x87ee740c5c5ff735%3A0x8bda3c8748a1a4db!2sJeff%27s%20Pizza%20Shop!5e0!3m2!1sen!2sus!4v1700000000000!5m2!1sen!2sus" 
+                    width="600" 
+                    height="450" 
+                    style="border:0;" 
+                    allowfullscreen="" 
+                    loading="lazy" 
+                    referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+            </div>
+            <div class="contact-form">
+                <h2>Get In Touch</h2>
+                <form action="#" method="post">
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" placeholder="Enter your name" required>
+                    
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                    
+                    <label for="message">Message:</label>
+                    <textarea id="message" name="message" placeholder="Write your message" rows="5" required></textarea>
+                    
+                    <button type="submit">Send Message</button>
+                </form>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 Jeff's Pizza Shop. Proudly serving Iowa State University and Ames.</p>
+    </footer>
+</body>
+</html>

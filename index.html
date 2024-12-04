@@ -2,56 +2,235 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Jeff's Pizza Shop - Home</title>
-    <link rel="stylesheet" href="styles/styles.css">
-    <link rel="stylesheet" href="styles/home.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="styles/global.css">
+    <style>
+        /* Home Page Specific Styling */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #fff5f0;
+            margin: 0;
+            padding: 0;
+            transition: all 0.3s ease-in-out;
+        }
+
+        header {
+            background-color: #e63946;
+            padding: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            transition: background-color 0.3s ease;
+        }
+        header:hover {
+            background-color: #d62828;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        .logo img {
+            width: 40px;
+            height: auto;
+            margin-right: 0.5rem;
+        }
+        .hamburger-menu {
+            display: none;
+            font-size: 2rem;
+            cursor: pointer;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+            height: 0;
+            transition: height 0.5s ease-in-out;
+        }
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 1.5rem;
+            margin: 0;
+            padding: 0;
+        }
+        nav ul li a {
+            color: #ffd700;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+        nav ul li a:hover {
+            color: #fff8f0;
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                display: block;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: #e63946;
+                flex-direction: column;
+                gap: 1rem;
+                padding: 0;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            }
+            .hamburger-menu {
+                display: block;
+            }
+            .nav-links.show {
+                height: auto;
+                padding: 1rem;
+            }
+            nav ul {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+
+        .hero {
+            background-image: url('https://scontent-ord5-2.xx.fbcdn.net/v/t39.30808-6/464868618_8642923992467266_1763516063275340306_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=cf85f3&_nc_ohc=EHIdpPRBNh0Q7kNvgFXPQRE&_nc_zt=23&_nc_ht=scontent-ord5-2.xx&_nc_gid=Ai1ndreAh6SKTlgr31Hbkt5&oh=00_AYBAOY7z2ZyM3xKCtVyM7amToYehbUd0j7Nro2XVbxlhdw&oe=67568667');
+            background-size: cover;
+            background-position: center;
+            height: 70vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.7);
+            padding: 2rem;
+        }
+        .hero h1 {
+            font-size: 3rem;
+            background-color: rgba(230, 57, 70, 0.8);
+            padding: 1rem;
+            border-radius: 10px;
+        }
+        .hero p {
+            margin: 1rem 0;
+            font-size: 1.5rem;
+            background-color: rgba(230, 57, 70, 0.8);
+            padding: 0.5rem 1rem;
+            border-radius: 10px;
+        }
+        .hero .order-btn {
+            background-color: #fff;
+            color: #e63946;
+            padding: 1rem 2rem;
+            border-radius: 30px;
+            font-weight: bold;
+            text-decoration: none;
+            transition: transform 0.3s, background-color 0.3s;
+        }
+        .hero .order-btn:hover {
+            transform: scale(1.05);
+            background-color: #ffeb3b;
+        }
+
+        .features {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 2rem;
+            padding: 3rem;
+            background-color: #f9f9f9;
+        }
+        .features img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        .features img:hover {
+            transform: rotate(15deg);
+        }
+        .features h3 {
+            margin-top: 1rem;
+            color: #e63946;
+        }
+        .feature-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 300px;
+        }
+
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 2rem;
+        }
+    </style>
 </head>
 <body>
     <header>
         <div class="logo">
+            <img src="https://static.wixstatic.com/media/fd3bc4_7661005b00424ef48ca93ec8039a754e~mv2.png" alt="Jeff's Pizza Logo">
             <h1>Jeff's Pizza Shop</h1>
-            <p>Your Local Favorite in Ames, Iowa</p>
         </div>
-        <nav>
+        <div class="hamburger-menu" id="menu-toggle">
+            <i class="fas fa-bars"></i>
+        </div>
+        <nav class="nav-links" id="nav">
             <ul>
+                <li><a href="#" class="active">Home</a></li>
                 <li><a href="menu.html">Menu</a></li>
-                <li><a href="tracker.html">Order Tracker</a></li>
+                <li><a href="order-tracker.html">Order Tracker</a></li>
                 <li><a href="rewards.html">Rewards</a></li>
-                <li><a href="specials.html">Specials</a></li>
                 <li><a href="contact.html">Contact</a></li>
             </ul>
         </nav>
     </header>
-    <main>
-        <section class="hero">
-            <h1>Welcome to Jeff's Pizza Shop</h1>
-            <p>Serving the Ames community and Iowa State University since 1973.</p>
-            <a href="menu.html" class="order-btn">Order Now</a>
-        </section>
-        <section class="features">
-            <h2>Why Choose Our App?</h2>
-            <div class="features-grid">
-                <div class="feature-item">
-                    <img src="images/tracking.png" alt="Order Tracking Icon" class="feature-icon">
-                    <h3>Real-Time Order Tracking</h3>
-                    <p>Track your pizza from the oven to your doorstep!</p>
-                </div>
-                <div class="feature-item">
-                    <img src="images/rewards.png" alt="Rewards Icon" class="feature-icon">
-                    <h3>Earn Rewards</h3>
-                    <p>Get points for every order and redeem for free pizzas and sides.</p>
-                </div>
-                <div class="feature-item">
-                    <img src="images/menu.png" alt="Menu Icon" class="feature-icon">
-                    <h3>Explore Our Menu</h3>
-                    <p>Discover our famous Buffalo Dan Pizza and other local favorites.</p>
-                </div>
-            </div>
-        </section>
-    </main>
+
+    <section class="hero">
+        <h1>Welcome to Jeff's Pizza Shop!</h1>
+        <p>Ames' favorite pizzeria, serving delicious handcrafted pizzas with fresh ingredients and real flavors.</p>
+        <a href="menu.html" class="order-btn">Order Now</a>
+    </section>
+
+    <section class="features">
+        <div class="feature-item">
+            <img src="images/tracking.png" alt="Order Tracking">
+            <h3>Order Tracking</h3>
+            <p>Track your pizza in real-time and know exactly when it's arriving!</p>
+        </div>
+        <div class="feature-item">
+            <img src="images/redrewards.png" alt="Rewards">
+            <h3>Earn Rewards</h3>
+            <p>Receive points for every purchase and redeem them for free pizzas and more.</p>
+        </div>
+        <div class="feature-item">
+            <img src="images/menu.png" alt="Our Menu">
+            <h3>Explore Our Menu</h3>
+            <p>Enjoy classics and specialties made to perfection for your delight.</p>
+        </div>
+    </section>
+
     <footer>
         <p>&copy; 2024 Jeff's Pizza Shop. Proudly serving Iowa State University and Ames.</p>
     </footer>
+
+    <script>
+        document.getElementById('menu-toggle').addEventListener('click', function() {
+            const nav = document.getElementById('nav');
+            if (nav.style.height === '0px' || nav.style.height === '') {
+                nav.style.height = nav.scrollHeight + 'px';
+            } else {
+                nav.style.height = '0';
+            }
+        });
+    </script>
 </body>
 </html>
