@@ -33,11 +33,13 @@
             padding: 0;
             display: flex;
             gap: 1rem;
+            flex-wrap: wrap;
         }
         header nav ul li a {
             text-decoration: none;
             color: #ffd700;
             font-weight: bold;
+            font-size: 0.9rem;
         }
         .tracker-container {
             max-width: 600px;
@@ -48,6 +50,10 @@
         .tracker-header h1 {
             font-size: 1.5rem;
             color: #800000;
+        }
+        .tracker-header p {
+            font-size: 0.9rem;
+            color: #555;
         }
         .status-bar {
             display: flex;
@@ -61,7 +67,7 @@
             text-align: center;
             flex: 1;
             position: relative;
-            animation: fadeIn 1s ease-in-out;
+            cursor: pointer;
         }
         .status-step i {
             font-size: 2rem;
@@ -77,24 +83,24 @@
             border: 3px solid #ddd;
             transition: all 0.3s ease-in-out, transform 0.4s;
         }
+        .status-step:hover i {
+            transform: scale(1.1);
+            background-color: #ffd700;
+            color: #800000;
+        }
+        .status-step span {
+            font-size: 0.9rem;
+            color: #555;
+        }
         .status-step.active i,
         .status-step.completed i {
             color: #fff;
             background-color: #800000;
             border-color: #800000;
         }
-        .status-step span {
-            font-size: 0.9rem;
-            color: #555;
-        }
         .status-step.active span {
             color: #800000;
             font-weight: bold;
-        }
-        .status-step i:hover {
-            transform: scale(1.2);
-            background-color: #ffd700;
-            color: #800000;
         }
         .status-connector {
             position: absolute;
@@ -105,42 +111,29 @@
             background-color: #ddd;
             z-index: -1;
         }
-        .status-step.completed ~ .status-connector {
+        .status-connector-fill {
+            height: 4px;
+            width: 75%;
             background-color: #800000;
-            animation: progressFill 2s ease-in-out forwards;
+            position: absolute;
+            left: 0;
+            top: 0;
+            animation: fillLine 1s ease-in-out forwards;
         }
-        @keyframes progressFill {
-            0% {
-                background-color: #ddd;
-                width: 0;
+        @keyframes fillLine {
+            from {
+                width: 0%;
             }
-            100% {
-                background-color: #800000;
-                width: 100%;
-            }
-        }
-        @keyframes fadeIn {
-            0% {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0);
+            to {
+                width: 75%;
             }
         }
-        @media (max-width: 768px) {
-            .tracker-container {
-                padding: 1rem;
-            }
-            .status-bar {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 1rem;
-            }
-            .status-connector {
-                display: none;
-            }
+        footer {
+            background-color: #800000;
+            color: #ffd700;
+            text-align: center;
+            padding: 0.5rem;
+            font-size: 0.8rem;
         }
     </style>
 </head>
@@ -168,17 +161,23 @@
                     <i class="fas fa-check"></i>
                     <span>Order Received</span>
                 </div>
-                <div class="status-connector"></div>
+                <div class="status-connector">
+                    <div class="status-connector-fill"></div>
+                </div>
                 <div class="status-step completed">
                     <i class="fas fa-pizza-slice"></i>
                     <span>Preparing</span>
                 </div>
-                <div class="status-connector"></div>
+                <div class="status-connector">
+                    <div class="status-connector-fill"></div>
+                </div>
                 <div class="status-step active">
                     <i class="fas fa-truck"></i>
                     <span>Out for Delivery</span>
                 </div>
-                <div class="status-connector"></div>
+                <div class="status-connector">
+                    <div class="status-connector-fill" style="width: 50%;"></div>
+                </div>
                 <div class="status-step">
                     <i class="fas fa-home"></i>
                     <span>Delivered</span>
