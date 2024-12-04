@@ -175,15 +175,18 @@
             justify-content: space-around;
             align-items: center;
             gap: 0.5rem;
-            flex-wrap: wrap;
+            flex-wrap: nowrap;
+            overflow-x: auto;
+            padding: 1rem;
         }
         .order-images img {
-            width: 70px;
+            width: 60px;
             height: auto;
             opacity: 0.3;
             transition: opacity 0.5s ease-in-out, border 0.5s ease-in-out;
             border-radius: 10px;
             border: 3px solid transparent;
+            flex-shrink: 0;
         }
         .order-images img.active {
             opacity: 1;
@@ -238,7 +241,7 @@
             <div class="order-images" id="order-images">
                 <img src="images/received.png" alt="Order Received" id="order-received">
                 <img src="images/prepping.png" alt="Order Processing" id="order-processing">
-                <img src="images/delivery.png" alt="Out for Delivery" id="out-for-delivery">
+                <img src="images/outfordelivery.png" alt="Out for Delivery" id="out-for-delivery">
                 <img src="images/delivered.png" alt="Order Delivered" id="order-delivered">
             </div>
         </div>
