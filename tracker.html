@@ -174,9 +174,11 @@
             display: flex;
             justify-content: space-around;
             align-items: center;
+            gap: 0.5rem;
+            flex-wrap: wrap;
         }
         .order-images img {
-            width: 100px;
+            width: 70px;
             height: auto;
             opacity: 0.3;
             transition: opacity 0.5s ease-in-out, border 0.5s ease-in-out;
@@ -212,12 +214,13 @@
             <ul>
                 <li><a href="index.html">Home</a></li>
                 <li><a href="menu.html">Menu</a></li>
-                <li><a href="tracker.html" class="active">Order Tracker</a></li>
+                <li><a href="#" class="active">Order Tracker</a></li>
                 <li><a href="rewards.html">Rewards</a></li>
                 <li><a href="contact.html">Contact</a></li>
             </ul>
         </nav>
     </header>
+
     <section class="tracker">
         <h1>Track Your Order</h1>
         <form class="tracker-form">
