@@ -1,0 +1,120 @@
+/* Tracker Section Styling */
+.tracker {
+    text-align: center;
+    padding: 2rem 1rem;
+    background: linear-gradient(to bottom, #ffe4b5, #fff8f0);
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    max-width: 1200px; /* Constrain the tracker width */
+    margin: 0 auto; /* Center the tracker section */
+}
+
+.tracker h1 {
+    font-size: 2.5rem;
+    color: #800000;
+    margin-bottom: 1.5rem;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+/* Status Bar */
+.tracker .status-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem; /* Add spacing between steps */
+    max-width: 100%; /* Prevent the bar from exceeding the container width */
+    margin: 0 auto;
+    padding: 0 2rem; /* Add padding to align within the website */
+    box-sizing: border-box; /* Include padding in width calculations */
+}
+
+.tracker .status-step {
+    flex: 1; /* Distribute items evenly across available space */
+    max-width: 150px; /* Limit the width of each step */
+    text-align: center;
+    position: relative;
+    transition: transform 0.3s ease-in-out;
+}
+
+.tracker .status-step:hover {
+    transform: scale(1.1); /* Add hover animation */
+}
+
+.tracker .status-step img {
+    width: 100px;
+    height: auto;
+    margin: 0 auto 0.5rem;
+    border-radius: 50%;
+    border: 5px solid #800000;
+    background-color: #fff;
+    padding: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.tracker .status-step img:hover {
+    border-color: #ffd700; /* Highlight border on hover */
+}
+
+.tracker .status-step h2 {
+    font-size: 1.2rem;
+    color: #555;
+    margin-top: 0.5rem;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* Active Step */
+.tracker .status-step.active img {
+    border-color: #ffd700;
+    animation: pulse 1.5s infinite; /* Pulse animation */
+}
+
+.tracker .status-step.active h2 {
+    color: #800000;
+    font-weight: bold;
+}
+
+/* Connectors */
+.tracker .status-connector {
+    flex-grow: 1; /* Stretch connectors to fill the space between steps */
+    height: 4px;
+    background-color: #ddd;
+    position: relative; /* Prevent overlapping */
+    z-index: -1;
+    transition: background-color 0.3s ease;
+}
+
+.tracker .status-step.active ~ .status-connector {
+    background-color: #800000;
+}
+
+/* Pulse Animation */
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+    }
+    50% {
+        transform: scale(1.1);
+        box-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
+    }
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .tracker .status-bar {
+        flex-direction: column; /* Stack items vertically */
+    }
+
+    .tracker .status-step img {
+        margin-bottom: 1rem;
+    }
+
+    .tracker .status-connector {
+        display: none; /* Hide connectors on smaller screens */
+    }
+}
