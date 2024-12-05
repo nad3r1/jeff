@@ -1,4 +1,3 @@
-
 <!-- Menu Page HTML -->
 <!DOCTYPE html>
 <html lang="en">
@@ -248,7 +247,7 @@
             </div>
         </div>
         <div class="proceed-to-checkout">
-            <a href="checkout.html"><button class="checkout-button">Proceed to Checkout</button></a>
+            <button class="checkout-button" id="checkout-button">Proceed to Checkout - (0) Items</button>
         </div>
     </section>
 
@@ -265,10 +264,12 @@
                 nav.style.height = '0';
             }
         });
-
+    
         // Cart Logic
         let cart = [];
         const addToCartButtons = document.querySelectorAll('.add-to-cart-button');
+        const checkoutButton = document.getElementById('checkout-button');
+    
         addToCartButtons.forEach(button => {
             button.addEventListener('click', function() {
                 const itemName = this.getAttribute('data-item');
@@ -276,22 +277,39 @@
                 const itemImage = window.location.origin + '/' + this.getAttribute('data-image');
                 cart.push({ name: itemName, price: itemPrice, image: itemImage });
                 updateCart();
+                alert(`${itemName} added to cart!`);
             });
         });
-
+    
         function updateCart() {
+            // Update localStorage
             localStorage.setItem('cart', JSON.stringify(cart));
+            
+            // Update checkout button text with the number of items
+            checkoutButton.textContent = `Proceed to Checkout - (${cart.length}) Items`;
         }
-
+    
         function loadCart() {
             const savedCart = localStorage.getItem('cart');
             if (savedCart) {
                 cart = JSON.parse(savedCart);
                 console.log(cart); // Log cart to verify the loaded items and image paths
+                // Update the cart count on load
+                checkoutButton.textContent = `Proceed to Checkout - (${cart.length}) Items`;
             }
         }
-
+    
         loadCart();
+    
+        // Redirect to checkout on button click
+        checkoutButton.addEventListener('click', function() {
+            if (cart.length > 0) {
+                window.location.href = 'checkout.html';
+            } else {
+                alert('Your cart is empty! Please add some items before proceeding to checkout.');
+            }
+        });
     </script>
+    
 </body>
 </html>
