@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jeff's Pizza Shop - Admin Data Tracker</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="styles/global.css">
+    <style>
+        /* Admin Page Specific Styling */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #e63946;
+            padding: 1rem;
+            text-align: center;
+            color: #fff;
+            font-size: 2rem;
+        }
+
+        .admin-container {
+            padding: 2rem;
+        }
+
+        .filter-container {
+            margin-bottom: 1rem;
+            display: flex;
+            justify-content: space-between;
+            gap: 1rem;
+        }
+
+        .admin-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+
+        .admin-table th,
+        .admin-table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+
+        .admin-table th {
+            background-color: #1d3557; /* Dark blue for the header row */
+            color: white;
+        }
+
+        .admin-table tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        .admin-table tr:hover {
+            background-color: #ddd;
+        }
+
+        .delivery {
+            color: #2a9d8f; /* Teal for Delivery */
+            font-weight: bold;
+        }
+
+        .pickup {
+            color: #e76f51; /* Orange for Pickup */
+            font-weight: bold;
+        }
+
+        .cash {
+            color: #e63946; /* Red for Cash */
+            font-weight: bold;
+        }
+
+        .card {
+            color: #0077b6; /* Blue for Card */
+            font-weight: bold;
+        }
+
+        .fast {
+            background-color: #90be6d !important; /* Green for fast times */
+        }
+
+        .average {
+            background-color: #f4a261 !important; /* Yellow for average times */
+        }
+
+        .slow {
+            background-color: #e63946 !important; /* Red for slow times */
+            color: white !important;
+        }
+
+        .filter-select {
+            padding: 0.5rem;
+            font-size: 1rem;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+    </style>
+</head>
+
+<body>
+    <header>Admin Data Tracker - Jeff's Pizza Shop</header>
+    <div class="admin-container">
+        <div class="filter-container">
+            <div>
+                <label for="order-filter">Filter by Order Type: </label>
+                <select id="order-filter" class="filter-select">
+                    <option value="all">All</option>
+                    <option value="pickup">Pickup</option>
+                    <option value="delivery">Delivery</option>
+                </select>
+            </div>
+            <div>
+                <label for="time-filter">Filter by Delivery Time: </label>
+                <select id="time-filter" class="filter-select">
+                    <option value="all">All</option>
+                    <option value="fast">Fast (<= 20 min)</option>
+                    <option value="average">Average (21-35 min)</option>
+                    <option value="slow">Slow (> 35 min)</option>
+                </select>
+            </div>
+        </div>
+        <h2>Order Data Tracking</h2>
+        <table class="admin-table" id="order-table">
+            <thead>
+                <tr>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Email</th>
+                    <th>Order Type</th>
+                    <th>Payment Method</th>
+                    <th>Total ($)</th>
+                    <th>Items Ordered</th>
+                    <th>Number of Items</th>
+                    <th>Order Time</th>
+                    <th>Pickup/Delivery Time</th>
+                    <th>Duration (min)</th>
+                    <th>Distance (miles)</th>
+                </tr>
+            </thead>
+            <tbody id="order-table-body">
+                <!-- Random Data Points -->
+                <script>
+                    const orders = [
+                        { firstName: 'John', lastName: 'Doe', email: 'john.doe@example.com', type: 'Delivery', payment: 'Card', total: 25.50, items: 'Pepperoni Pizza, Garlic Knots', numItems: 2, orderTime: '12:30 PM', deliveryTime: '12:55 PM', duration: 25, distance: 3.2 },
+                        { firstName: 'Jane', lastName: 'Smith', email: 'jane.smith@example.com', type: 'Pickup', payment: 'Cash', total: 19.99, items: 'Veggie Pizza', numItems: 1, orderTime: '1:00 PM', deliveryTime: '1:20 PM', duration: 20, distance: null },
+                        { firstName: 'Michael', lastName: 'Johnson', email: 'michael.j@example.com', type: 'Delivery', payment: 'Cash', total: 30.75, items: 'BBQ Chicken Pizza, Breadsticks', numItems: 2, orderTime: '2:15 PM', deliveryTime: '2:38 PM', duration: 23, distance: 4.5 },
+                        { firstName: 'Emily', lastName: 'Clark', email: 'emily.c@example.com', type: 'Pickup', payment: 'Card', total: 15.25, items: 'Margherita Pizza', numItems: 1, orderTime: '3:00 PM', deliveryTime: '3:17 PM', duration: 17, distance: null },
+                        { firstName: 'Robert', lastName: 'Williams', email: 'robert.w@example.com', type: 'Delivery', payment: 'Card', total: 40.00, items: 'Supreme Pizza, Cheese Sticks', numItems: 2, orderTime: '4:00 PM', deliveryTime: '4:43 PM', duration: 43, distance: 5.8 },
+                        // Additional 20 orders added to reach 25 examples
+                        { firstName: 'Sarah', lastName: 'Brown', email: 'sarah.b@example.com', type: 'Pickup', payment: 'Cash', total: 22.00, items: 'Hawaiian Pizza', numItems: 1, orderTime: '5:00 PM', deliveryTime: '5:18 PM', duration: 18, distance: null },
+                        { firstName: 'James', lastName: 'Anderson', email: 'james.a@example.com', type: 'Delivery', payment: 'Card', total: 27.99, items: 'Meat Lovers Pizza', numItems: 1, orderTime: '6:15 PM', deliveryTime: '6:40 PM', duration: 25, distance: 6.1 },
+                        { firstName: 'Linda', lastName: 'Lee', email: 'linda.l@example.com', type: 'Pickup', payment: 'Card', total: 18.45, items: 'Pepperoni Pizza', numItems: 1, orderTime: '7:00 PM', deliveryTime: '7:27 PM', duration: 27, distance: null },
+                        { firstName: 'David', lastName: 'Martinez', email: 'david.m@example.com', type: 'Delivery', payment: 'Cash', total: 34.20, items: 'Buffalo Chicken Pizza, Salad', numItems: 2, orderTime: '8:00 PM', deliveryTime: '8:59 PM', duration: 59, distance: 2.7 },
+                        { firstName: 'Anna', lastName: 'Davis', email: 'anna.d@example.com', type: 'Delivery', payment: 'Card', total: 29.85, items: 'BBQ Chicken Pizza, Garlic Bread', numItems: 2, orderTime: '9:00 PM', deliveryTime: '9:28 PM', duration: 28, distance: 4.9 },
+                        { firstName: 'Henry', lastName: 'White', email: 'henry.w@example.com', type: 'Pickup', payment: 'Cash', total: 16.50, items: 'Cheese Pizza', numItems: 1, orderTime: '10:00 AM', deliveryTime: '10:19 AM', duration: 19, distance: null },
+                        { firstName: 'Olivia', lastName: 'Lopez', email: 'olivia.l@example.com', type: 'Delivery', payment: 'Card', total: 45.30, items: 'Pepperoni Pizza, Wings', numItems: 2, orderTime: '11:15 AM', deliveryTime: '11:46 AM', duration: 31, distance: 3.4 },
+                        { firstName: 'Lucas', lastName: 'Garcia', email: 'lucas.g@example.com', type: 'Delivery', payment: 'Cash', total: 23.10, items: 'Veggie Pizza', numItems: 1, orderTime: '1:30 PM', deliveryTime: '1:55 PM', duration: 20, distance: 5.2 },
+                        { firstName: 'Sophia', lastName: 'King', email: 'sophia.k@example.com', type: 'Pickup', payment: 'Card', total: 20.75, items: 'Hawaiian Pizza', numItems: 1, orderTime: '2:45 PM', deliveryTime: '3:23 PM', duration: 38, distance: null },
+                        { firstName: 'Jackson', lastName: 'Harris', email: 'jackson.h@example.com', type: 'Delivery', payment: 'Card', total: 32.60, items: 'Meat Lovers Pizza', numItems: 1, orderTime: '4:20 PM', deliveryTime: '4:52 PM', duration: 32, distance: 7.3 },
+                        { firstName: 'Mia', lastName: 'Thompson', email: 'mia.t@example.com', type: 'Pickup', payment: 'Cash', total: 14.90, items: 'Cheese Pizza', numItems: 1, orderTime: '5:10 PM', deliveryTime: '5:29 PM', duration: 19, distance: null },
+                        { firstName: 'Ethan', lastName: 'Scott', email: 'ethan.s@example.com', type: 'Delivery', payment: 'Cash', total: 28.40, items: 'Pepperoni Pizza, Garlic Knots', numItems: 2, orderTime: '6:05 PM', deliveryTime: '6:35 PM', duration: 30, distance: 2.3 },
+                        { firstName: 'Zoe', lastName: 'Adams', email: 'zoe.a@example.com', type: 'Pickup', payment: 'Card', total: 19.60, items: 'Margherita Pizza', numItems: 1, orderTime: '7:25 PM', deliveryTime: '7:47 PM', duration: 22, distance: null },
+                        { firstName: 'Mason', lastName: 'Baker', email: 'mason.b@example.com', type: 'Delivery', payment: 'Card', total: 31.80, items: 'Supreme Pizza', numItems: 1, orderTime: '8:10 PM', deliveryTime: '8:42 PM', duration: 32, distance: 4.6 },
+                        { firstName: 'Ella', lastName: 'Nelson', email: 'ella.n@example.com', type: 'Delivery', payment: 'Cash', total: 26.70, items: 'BBQ Chicken Pizza', numItems: 1, orderTime: '9:45 PM', deliveryTime: '10:11 PM', duration: 26, distance: 5.0 },
+                        { firstName: 'Benjamin', lastName: 'Carter', email: 'ben.c@example.com', type: 'Pickup', payment: 'Card', total: 17.30, items: 'Cheese Pizza, Salad', numItems: 2, orderTime: '10:30 AM', deliveryTime: '10:49 AM', duration: 19, distance: null },
+                        { firstName: 'Charlotte', lastName: 'Evans', email: 'charlotte.e@example.com', type: 'Delivery', payment: 'Card', total: 35.90, items: 'Buffalo Chicken Pizza', numItems: 1, orderTime: '11:50 AM', deliveryTime: '12:20 PM', duration: 30, distance: 6.7 },
+                        { firstName: 'Daniel', lastName: 'Parker', email: 'daniel.p@example.com', type: 'Pickup', payment: 'Cash', total: 21.40, items: 'Supreme Pizza', numItems: 1, orderTime: '1:05 PM', deliveryTime: '1:25 PM', duration: 20, distance: null },
+                        { firstName: 'Amelia', lastName: 'Hill', email: 'amelia.h@example.com', type: 'Delivery', payment: 'Cash', total: 39.00, items: 'Hawaiian Pizza, Wings', numItems: 2, orderTime: '3:15 PM', deliveryTime: '3:49 PM', duration: 34, distance: 8.2 },
+                        { firstName: 'William', lastName: 'Green', email: 'william.g@example.com', type: 'Pickup', payment: 'Card', total: 24.90, items: 'Margherita Pizza', numItems: 1, orderTime: '4:40 PM', deliveryTime: '5:05 PM', duration: 25, distance: null },
+                        // Additional orders to total 25
+                    ];
+
+                    const tableBody = document.getElementById('order-table-body');
+
+                    orders.forEach(order => {
+                        const row = document.createElement('tr');
+
+                        // Assign class based on duration for color coding
+                        if (order.duration <= 20) {
+                            row.classList.add('fast');
+                        } else if (order.duration <= 35) {
+                            row.classList.add('average');
+                        } else {
+                            row.classList.add('slow');
+
+                            // Change text color to white for specific columns to ensure readability
+                            row.innerHTML = `
+                                <td>${order.firstName}</td>
+                                <td>${order.lastName}</td>
+                                <td>${order.email}</td>
+                                <td class="${order.type.toLowerCase()}" style="color: white;">${order.type}</td>
+                                <td class="${order.payment.toLowerCase()}" style="color: white;">${order.payment}</td>
+                                <td>${order.total.toFixed(2)}</td>
+                                <td>${order.items}</td>
+                                <td>${order.numItems}</td>
+                                <td>${order.orderTime}</td>
+                                <td>${order.deliveryTime}</td>
+                                <td>${order.duration}</td>
+                                <td>${order.distance !== null ? order.distance : '-'}</td>
+                            `;
+                            tableBody.appendChild(row);
+                            return; // Skip adding the innerHTML below for "slow" rows
+                        }
+
+                        // For non-"slow" rows, add innerHTML without white text adjustments
+                        row.innerHTML = `
+                            <td>${order.firstName}</td>
+                            <td>${order.lastName}</td>
+                            <td>${order.email}</td>
+                            <td class="${order.type.toLowerCase()}">${order.type}</td>
+                            <td class="${order.payment.toLowerCase()}">${order.payment}</td>
+                            <td>${order.total.toFixed(2)}</td>
+                            <td>${order.items}</td>
+                            <td>${order.numItems}</td>
+                            <td>${order.orderTime}</td>
+                            <td>${order.deliveryTime}</td>
+                            <td>${order.duration}</td>
+                            <td>${order.distance !== null ? order.distance : '-'}</td>
+                        `;
+
+                        tableBody.appendChild(row);
+                    });
+                </script>
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        // Filter functionality for Order Type
+        const orderFilter = document.getElementById('order-filter');
+        orderFilter.addEventListener('change', function () {
+            const filterValue = orderFilter.value;
+            const rows = document.querySelectorAll('#order-table-body tr');
+
+            rows.forEach(row => {
+                const orderType = row.querySelector('td:nth-child(4)').textContent.toLowerCase();
+                if (filterValue === 'all' || orderType === filterValue) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        });
+
+        // Filter functionality for Delivery Time
+        const timeFilter = document.getElementById('time-filter');
+        timeFilter.addEventListener('change', function () {
+            const filterValue = timeFilter.value;
+            const rows = document.querySelectorAll('#order-table-body tr');
+
+            rows.forEach(row => {
+                // Apply filter based on row class (fast, average, slow)
+                if (filterValue === 'all' || row.classList.contains(filterValue)) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
