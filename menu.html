@@ -1,3 +1,5 @@
+
+<!-- Menu Page HTML -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -96,53 +98,84 @@
             }
         }
 
-        .menu {
-            padding: 3rem 1rem;
+        .menu-container {
+            padding: 2rem;
             background-color: #f9f9f9;
-            text-align: center;
         }
-        .menu h1 {
+        .menu-container h1 {
             font-size: 2.5rem;
             color: #e63946;
+            text-align: center;
             margin-bottom: 2rem;
         }
-        .menu-item {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            background-color: #fff;
-            padding: 1.5rem;
-            border-radius: 15px;
-            margin: 1rem 0;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        .menu-items {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            justify-items: center;
         }
-        .menu-item img {
-            width: 100px;
-            height: auto;
-            border-radius: 10px;
-            margin-right: 1.5rem;
+        .menu-item {
+            background-color: #fff;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: transform 0.3s;
+            width: 100%;
+            max-width: 300px;
         }
         .menu-item:hover {
             transform: scale(1.05);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
         }
-        .menu-item-details {
-            flex: 1;
-            text-align: left;
+        .menu-item img {
+            width: 100%;
+            height: auto;
         }
-        .menu-item-details h3 {
+        .menu-item-content {
+            padding: 1.5rem;
+            text-align: center;
+        }
+        .menu-item h3 {
             color: #e63946;
-            font-size: 1.8rem;
-            margin: 0;
+            font-size: 1.5rem;
         }
-        .menu-item-details p {
-            color: #555;
+        .menu-item p {
             margin: 0.5rem 0;
+            color: #666;
         }
-        .menu-item-details span {
-            font-weight: bold;
+        .menu-item span {
             color: #ffd700;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        .add-to-cart-button {
+            padding: 0.5rem 1rem;
+            background-color: #e63946;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .add-to-cart-button:hover {
+            background-color: #d62828;
+        }
+
+        .proceed-to-checkout {
+            margin-top: 3rem;
+            text-align: center;
+        }
+        .checkout-button {
+            padding: 1rem 2rem;
+            background-color: #e63946;
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            font-size: 1.2rem;
+        }
+        .checkout-button:hover {
+            background-color: #d62828;
         }
 
         footer {
@@ -169,43 +202,53 @@
                 <li><a href="tracker.html">Order Tracker</a></li>
                 <li><a href="rewards.html">Rewards</a></li>
                 <li><a href="contact.html">Contact</a></li>
+                <li><a href="checkout.html">Checkout</a></li>
             </ul>
         </nav>
     </header>
 
-    <section class="menu">
+    <section class="menu-container">
         <h1>Our Menu</h1>
-        <div class="menu-item">
-            <img src="images/pepmenu.png" alt="Pepperoni Pizza">
-            <div class="menu-item-details">
-                <h3>Pepperoni Pizza</h3>
-                <p>Classic pepperoni with mozzarella cheese and tomato sauce.</p>
-                <span>$12.99</span>
+        <div class="menu-items">
+            <div class="menu-item">
+                <img src="images/pepmenu.png" alt="Pepperoni Pizza">
+                <div class="menu-item-content">
+                    <h3>Pepperoni Pizza</h3>
+                    <p>Classic pepperoni with mozzarella cheese and tomato sauce.</p>
+                    <span>$12.99</span><br>
+                    <button class="add-to-cart-button" data-item="Pepperoni Pizza" data-price="12.99" data-image="images/pepmenu.png">Add to Cart</button>
+                </div>
+            </div>
+            <div class="menu-item">
+                <img src="images/vegmenu.png" alt="Veggie Delight">
+                <div class="menu-item-content">
+                    <h3>Veggie Delight</h3>
+                    <p>Topped with bell peppers, olives, onions, and mushrooms.</p>
+                    <span>$11.99</span><br>
+                    <button class="add-to-cart-button" data-item="Veggie Delight" data-price="11.99" data-image="images/vegmenu.png">Add to Cart</button>
+                </div>
+            </div>
+            <div class="menu-item">
+                <img src="images/bufmenu.png" alt="Buffalo Chicken Pizza">
+                <div class="menu-item-content">
+                    <h3>Buffalo Chicken Pizza</h3>
+                    <p>Grilled chicken, buffalo sauce, mozzarella, and blue cheese.</p>
+                    <span>$13.99</span><br>
+                    <button class="add-to-cart-button" data-item="Buffalo Chicken Pizza" data-price="13.99" data-image="images/bufmenu.png">Add to Cart</button>
+                </div>
+            </div>
+            <div class="menu-item">
+                <img src="images/bbqmenu.png" alt="BBQ Bacon Cheeseburger Pizza">
+                <div class="menu-item-content">
+                    <h3>BBQ Bacon Cheeseburger Pizza</h3>
+                    <p>Ground beef, crispy bacon, BBQ sauce, and cheddar cheese.</p>
+                    <span>$14.99</span><br>
+                    <button class="add-to-cart-button" data-item="BBQ Bacon Cheeseburger Pizza" data-price="14.99" data-image="images/bbqmenu.png">Add to Cart</button>
+                </div>
             </div>
         </div>
-        <div class="menu-item">
-            <img src="images/vegmenu.png" alt="Veggie Delight">
-            <div class="menu-item-details">
-                <h3>Veggie Delight</h3>
-                <p>Topped with bell peppers, olives, onions, and mushrooms.</p>
-                <span>$11.99</span>
-            </div>
-        </div>
-        <div class="menu-item">
-            <img src="images/bufmenu.png" alt="Buffalo Chicken Pizza">
-            <div class="menu-item-details">
-                <h3>Buffalo Chicken Pizza</h3>
-                <p>Grilled chicken, buffalo sauce, mozzarella, and blue cheese.</p>
-                <span>$13.99</span>
-            </div>
-        </div>
-        <div class="menu-item">
-            <img src="images/bbqmenu.png" alt="BBQ Bacon Cheeseburger Pizza">
-            <div class="menu-item-details">
-                <h3>BBQ Bacon Cheeseburger Pizza</h3>
-                <p>Ground beef, crispy bacon, BBQ sauce, and cheddar cheese.</p>
-                <span>$14.99</span>
-            </div>
+        <div class="proceed-to-checkout">
+            <a href="checkout.html"><button class="checkout-button">Proceed to Checkout</button></a>
         </div>
     </section>
 
@@ -217,11 +260,39 @@
         document.getElementById('menu-toggle').addEventListener('click', function() {
             const nav = document.getElementById('nav');
             if (nav.style.height === '0px' || nav.style.height === '') {
-                nav.style.height = nav.scrollHeight + 'px'; // Set height to auto-expand based on content
+                nav.style.height = nav.scrollHeight + 'px';
             } else {
                 nav.style.height = '0';
             }
         });
+
+        // Cart Logic
+        let cart = [];
+        const addToCartButtons = document.querySelectorAll('.add-to-cart-button');
+        addToCartButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const itemName = this.getAttribute('data-item');
+                const itemPrice = parseFloat(this.getAttribute('data-price'));
+                const itemImage = window.location.origin + '/' + this.getAttribute('data-image');
+                cart.push({ name: itemName, price: itemPrice, image: itemImage });
+                updateCart();
+                alert(`${itemName} added to cart!`);
+            });
+        });
+
+        function updateCart() {
+            localStorage.setItem('cart', JSON.stringify(cart));
+        }
+
+        function loadCart() {
+            const savedCart = localStorage.getItem('cart');
+            if (savedCart) {
+                cart = JSON.parse(savedCart);
+                console.log(cart); // Log cart to verify the loaded items and image paths
+            }
+        }
+
+        loadCart();
     </script>
 </body>
 </html>

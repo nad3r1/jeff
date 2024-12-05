@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Jeff's Pizza Shop - Checkout</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="styles/global.css">
+    <style>
+        /* Checkout Page Specific Styling */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #fff5f0;
+            margin: 0;
+            padding: 0;
+            transition: all 0.3s ease-in-out;
+        }
+
+        header {
+            background-color: #e63946;
+            padding: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            transition: background-color 0.3s ease;
+        }
+        header:hover {
+            background-color: #d62828;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        .logo img {
+            width: 40px;
+            height: auto;
+            margin-right: 0.5rem;
+        }
+        .hamburger-menu {
+            display: none;
+            font-size: 2rem;
+            cursor: pointer;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+            height: 0;
+            transition: height 0.5s ease-in-out;
+        }
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 1.5rem;
+            margin: 0;
+            padding: 0;
+        }
+        nav ul li a {
+            color: #ffd700;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+        nav ul li a:hover {
+            color: #fff8f0;
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                display: block;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: #e63946;
+                flex-direction: column;
+                gap: 1rem;
+                padding: 0;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            }
+            .hamburger-menu {
+                display: block;
+            }
+            .nav-links.show {
+                height: auto;
+                padding: 1rem;
+            }
+            nav ul {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+
+        .checkout-container {
+            padding: 3rem;
+            background-color: #f9f9f9;
+        }
+        .checkout-container h1 {
+            font-size: 2.5rem;
+            color: #e63946;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        .cart-items {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        .cart-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: #fff;
+            padding: 1rem;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        .cart-item img {
+            width: 80px;
+            height: auto;
+            border-radius: 10px;
+            margin-right: 1rem;
+        }
+        .cart-item-details {
+            flex: 1;
+            text-align: left;
+        }
+        .cart-item-details h3 {
+            color: #e63946;
+            margin: 0;
+        }
+        .cart-item-details p {
+            color: #666;
+            margin: 0.5rem 0;
+        }
+        .cart-total {
+            font-size: 1.8rem;
+            text-align: right;
+            margin-bottom: 1rem;
+            color: #e63946;
+        }
+        .cart-points {
+            font-size: 1.4rem;
+            text-align: right;
+            margin-bottom: 2rem;
+            color: #666;
+        }
+        .checkout-button {
+            padding: 1rem 2rem;
+            background-color: #e63946;
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            font-size: 1.2rem;
+            display: block;
+            margin: 0 auto;
+        }
+        .checkout-button:hover {
+            background-color: #d62828;
+        }
+        .clear-cart-button {
+            padding: 0.5rem 1rem;
+            background-color: #555;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .clear-cart-button:hover {
+            background-color: #333;
+        }
+
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 2rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="https://static.wixstatic.com/media/fd3bc4_7661005b00424ef48ca93ec8039a754e~mv2.png" alt="Jeff's Pizza Logo">
+            <h1>Jeff's Pizza Shop</h1>
+        </div>
+        <div class="hamburger-menu" id="menu-toggle">
+            <i class="fas fa-bars"></i>
+        </div>
+        <nav class="nav-links" id="nav">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="menu.html">Menu</a></li>
+                <li><a href="tracker.html">Order Tracker</a></li>
+                <li><a href="rewards.html">Rewards</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="checkout-container">
+        <h1>Checkout</h1>
+        <div class="cart-items" id="cart-items">
+            <!-- Cart items will be injected here -->
+        </div>
+        <div class="cart-total" id="cart-total">
+            Total: $0.00
+        </div>
+        <div class="cart-points" id="cart-points">
+            You have earned 0 Jeff's Points with this purchase!
+        </div>
+        <div class="checkout-buttons">
+            <button class="clear-cart-button" id="clear-cart">Clear Cart</button>
+            <button class="checkout-button" id="proceed-payment">Proceed to Payment</button>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Jeff's Pizza Shop. Proudly serving Iowa State University and Ames.</p>
+    </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            loadCart();
+        });
+
+        document.getElementById('menu-toggle').addEventListener('click', function() {
+            const nav = document.getElementById('nav');
+            if (nav.style.height === '0px' || nav.style.height === '') {
+                nav.style.height = nav.scrollHeight + 'px';
+            } else {
+                nav.style.height = '0';
+            }
+        });
+
+        // Cart Logic
+        let cart = [];
+
+        function loadCart() {
+            const savedCart = localStorage.getItem('cart');
+            if (savedCart) {
+                cart = JSON.parse(savedCart);
+                console.log("Cart loaded from localStorage:", cart);
+                displayCartItems();
+            }
+        }
+
+        function getImageForItem(itemName) {
+            // Determine image path based on the item name
+            switch(itemName) {
+                case "Pepperoni Pizza":
+                    return 'images/pepmenu.png';
+                case "Veggie Delight":
+                    return 'images/vegmenu.png';
+                case "Buffalo Chicken Pizza":
+                    return 'images/bufmenu.png';
+                case "BBQ Bacon Cheeseburger Pizza":
+                    return 'images/bbqmenu.png';
+                default:
+                    return 'images/default.png'; // Fallback image if no match found
+            }
+        }
+
+        function displayCartItems() {
+            const cartItemsContainer = document.getElementById('cart-items');
+            const cartTotalElement = document.getElementById('cart-total');
+            const cartPointsElement = document.getElementById('cart-points');
+            cartItemsContainer.innerHTML = '';
+            let total = 0;
+
+            cart.forEach(item => {
+                console.log("Processing cart item:", item); // Debugging line
+                const cartItemElement = document.createElement('div');
+                cartItemElement.classList.add('cart-item');
+                
+                // Get the correct image for the item
+                const itemImage = document.createElement('img');
+                itemImage.src = getImageForItem(item.name);
+                itemImage.alt = item.name;
+                itemImage.onerror = function() {
+                    console.error(`Image not found for: ${item.name}`); // Log the error to the console
+                    itemImage.src = 'images/default.png'; // Ensure 'images/default.png' exists
+                };
+                cartItemElement.appendChild(itemImage);
+
+                const cartItemDetails = document.createElement('div');
+                cartItemDetails.classList.add('cart-item-details');
+                const itemName = document.createElement('h3');
+                itemName.textContent = item.name;
+                const itemPrice = document.createElement('p');
+                itemPrice.textContent = `$${item.price.toFixed(2)}`;
+                cartItemDetails.appendChild(itemName);
+                cartItemDetails.appendChild(itemPrice);
+
+                cartItemElement.appendChild(cartItemDetails);
+
+                cartItemsContainer.appendChild(cartItemElement);
+                total += item.price;
+            });
+
+            cartTotalElement.textContent = `Total: $${total.toFixed(2)}`;
+
+            // Adding points total
+            const points = Math.floor(total);
+            cartPointsElement.textContent = `You have earned ${points} Jeff's Points with this purchase!`;
+        }
+
+        document.getElementById('clear-cart').addEventListener('click', function() {
+            cart = [];
+            localStorage.removeItem('cart');
+            displayCartItems();
+        });
+
+        document.getElementById('proceed-payment').addEventListener('click', function() {
+            if (cart.length === 0) {
+                alert('Your cart is empty! Please add some items before proceeding to payment.');
+            } else {
+                window.location.href = 'payment.html';
+            }
+        });
+    </script>
+</body>
+</html>

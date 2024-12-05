@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Jeff's Pizza Shop - Home</title>
+    <title>Jeff's Pizza Shop - Payment</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="styles/global.css">
     <style>
-        /* Home Page Specific Styling */
+        /* Payment Page Specific Styling */
         body {
             font-family: 'Arial', sans-serif;
             background-color: #fff5f0;
@@ -96,74 +96,50 @@
             }
         }
 
-        .hero {
-            background-image: url('https://scontent-ord5-2.xx.fbcdn.net/v/t39.30808-6/464868618_8642923992467266_1763516063275340306_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=cf85f3&_nc_ohc=EHIdpPRBNh0Q7kNvgFXPQRE&_nc_zt=23&_nc_ht=scontent-ord5-2.xx&_nc_gid=Ai1ndreAh6SKTlgr31Hbkt5&oh=00_AYBAOY7z2ZyM3xKCtVyM7amToYehbUd0j7Nro2XVbxlhdw&oe=67568667');
-            background-size: cover;
-            background-position: center;
-            height: 70vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            color: #fff;
-            text-shadow: 2px 2px 10px rgba(0,0,0,0.7);
+        .payment-container {
             padding: 2rem;
-        }
-        .hero h1 {
-            font-size: 3rem;
-            background-color: rgba(230, 57, 70, 0.8);
-            padding: 1rem;
-            border-radius: 10px;
-        }
-        .hero p {
-            margin: 1rem 0;
-            font-size: 1.5rem;
-            background-color: rgba(230, 57, 70, 0.8);
-            padding: 0.5rem 1rem;
-            border-radius: 10px;
-        }
-        .hero .order-btn {
-            background-color: #fff;
-            color: #e63946;
-            padding: 1rem 2rem;
-            border-radius: 30px;
-            font-weight: bold;
-            text-decoration: none;
-            transition: transform 0.3s, background-color 0.3s;
-        }
-        .hero .order-btn:hover {
-            transform: scale(1.05);
-            background-color: #ffeb3b;
-        }
-
-        .features {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            gap: 2rem;
-            padding: 3rem;
             background-color: #f9f9f9;
         }
-        .features img {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease;
-        }
-        .features img:hover {
-            transform: rotate(15deg);
-        }
-        .features h3 {
-            margin-top: 1rem;
+        .payment-container h1 {
+            font-size: 2.5rem;
             color: #e63946;
+            text-align: center;
+            margin-bottom: 2rem;
         }
-        .feature-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            max-width: 300px;
+        .payment-form {
+            max-width: 500px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        .payment-form label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+            color: #666;
+        }
+        .payment-form input {
+            width: 100%;
+            padding: 0.75rem;
+            margin-bottom: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+        }
+        .payment-form .pay-button {
+            padding: 1rem;
+            font-size: 1.2rem;
+            background-color: #e63946;
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            width: 100%;
+        }
+        .payment-form .pay-button:hover {
+            background-color: #d62828;
         }
 
         footer {
@@ -185,7 +161,7 @@
         </div>
         <nav class="nav-links" id="nav">
             <ul>
-                <li><a href="#" class="active">Home</a></li>
+                <li><a href="index.html">Home</a></li>
                 <li><a href="menu.html">Menu</a></li>
                 <li><a href="tracker.html">Order Tracker</a></li>
                 <li><a href="rewards.html">Rewards</a></li>
@@ -195,28 +171,23 @@
         </nav>
     </header>
 
-    <section class="hero">
-        <h1>Welcome to Jeff's Pizza Shop!</h1>
-        <p>Ames' favorite pizzeria, serving delicious handcrafted pizzas with fresh ingredients and real flavors.</p>
-        <a href="menu.html" class="order-btn">Order Now</a>
-    </section>
+    <section class="payment-container">
+        <h1>Payment</h1>
+        <form class="payment-form" id="payment-form">
+            <label for="cardholder-name">Cardholder Name</label>
+            <input type="text" id="cardholder-name" placeholder="Enter your name" required>
 
-    <section class="features">
-        <div class="feature-item">
-            <img src="images/tracking.png" alt="Order Tracking">
-            <h3>Order Tracking</h3>
-            <p>Track your pizza in real-time and know exactly when it's arriving!</p>
-        </div>
-        <div class="feature-item">
-            <img src="images/redrewards.png" alt="Rewards">
-            <h3>Earn Rewards</h3>
-            <p>Receive points for every purchase and redeem them for free pizzas and more.</p>
-        </div>
-        <div class="feature-item">
-            <img src="images/menu.png" alt="Our Menu">
-            <h3>Explore Our Menu</h3>
-            <p>Enjoy classics and specialties made to perfection for your delight.</p>
-        </div>
+            <label for="card-number">Card Number</label>
+            <input type="text" id="card-number" placeholder="1234 5678 9012 3456" required>
+
+            <label for="expiry-date">Expiry Date</label>
+            <input type="text" id="expiry-date" placeholder="MM/YY" required>
+
+            <label for="cvv">CVV</label>
+            <input type="text" id="cvv" placeholder="123" required>
+
+            <button type="submit" class="pay-button">Pay Now</button>
+        </form>
     </section>
 
     <footer>
@@ -231,6 +202,13 @@
             } else {
                 nav.style.height = '0';
             }
+        });
+
+        // Payment form submit handler
+        document.getElementById('payment-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            alert('Payment successfully processed!');
+            window.location.href = 'index.html';
         });
     </script>
 </body>
